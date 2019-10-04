@@ -58,17 +58,7 @@
                     border-top-right-radius: 0px;
                     border-bottom-right-radius: 0px;
                     border-right: 0px;
-                    .ng-value{
-                        position: fixed;
-                    }
-                }
-            }
-        }
-
-        .to-amount-drop{
-            >.ng-select-container.ng-has-value{
-                .ng-arrow-wrapper{
-                    padding-top: 10px;
+                    position: unset;
                 }
             }
         }
@@ -107,9 +97,9 @@
                 border-radius: 4px;
             }
             .card-body{
+                white-space: initial;
                 h5{
                     margin: 10px 0px;
-                    white-space: initial;
                 }
             }
             .card-currency{
