@@ -1,0 +1,71 @@
+<div class="bg">
+    <div class="white-container">
+        <div class="container-holder">
+            <div class="input-boxes-container">
+                <div class="from-container">
+                    <div class="from-currency-container">
+                        <label><b>From:</b></label>
+                        <ng-select class="from-amount-drop" [(ngModel)]="fromCurrency" disabled>
+                            <ng-template ng-label-tmp>
+                                <img height="15" width="20" [src]="fromCurrencyThumbnail" />
+                                {{fromCurrency}}
+                            </ng-template>
+                        </ng-select>
+                    </div>
+                    <div class="from-amount-container">
+                        <input (keyup)="inputKeyUp($event)" class="from-amount-input" type="number"
+                            [(ngModel)]="fromAmount" placeholder="Amount" />
+                    </div>
+                </div>
+                <div class="to-container">
+                    <div class="to-currency-container">
+                        <label><b>To:</b></label>
+                        <ng-select class="to-amount-drop" (change)="onChange($event)" [items]="countriesData"
+                            [clearable]="false" [(ngModel)]="toCurrency" bindLabel="name" bindValue="currencies.code">
+                            <ng-template ng-option-tmp let-item="item" let-index="index" let-search="searchTerm">
+                                <div style="margin: 10px 0;" class="card">
+                                    <div class="card-body">
+                                        <h5 class="card-title">{{item.name}}</h5>
+                                        <div class="card-details">
+                                            <h6 class="card-subtitle mb-2 text-muted"><b>Capital: </b>{{item.capital}}
+                                            </h6>
+                                            <h6 class="card-subtitle mb-2 text-muted"><b>Population:
+                                                </b>{{item.population}}</h6>
+                                        </div>
+                                        <div class="card-currency">
+                                            <img height="15" width="20" [src]="item.flag" />
+                                            <h6 class="card-subtitle mb-2 text-muted">{{item.currencies.code}}</h6>
+                                        </div>
+                                    </div>
+                                </div>
+                            </ng-template>
+                            <ng-template ng-label-tmp let-item="item">
+                                <img height="15" width="20" [src]="item.flag" />
+                                {{item.currencies.code}}
+                            </ng-template>
+                        </ng-select>
+                    </div>
+                    <div class="to-amount-container">
+                        <input (keyup)="inputKeyUp($event)" class="to-amount-input" type="number" [(ngModel)]="toAmount"
+                            placeholder="Amount" />
+                    </div>
+                </div>
+            </div>
+            <div class="details-container">
+                <div class="rate-container">
+                    <p><b>SEK</b> {{toggleFromExchangeRate}}</p>
+                    <button color="primary" (click)="toggleRate()" mat-mini-fab>
+                        <mat-icon>compare_arrows</mat-icon>
+                    </button>
+                    <p *ngIf="toCurrency"><b>{{toCurrency}} </b> {{toggleToExchangeRate}}</p>
+                </div>
+                <div class="country-container">
+                    <button (click)="learnMore(selectedCountry)" mat-mini-fab>
+                        <mat-icon>favorite</mat-icon>
+                    </button>
+                    <p *ngIf="selectedCountry"><b>Learn more about {{selectedCountry.name}}</b></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

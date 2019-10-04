@@ -3,7 +3,10 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  countryBaseURL: "https://restcountries.eu/rest/v2",
+  rateBaseURL: "https://api.exchangeratesapi.io",
+  photoBaseURL: "https://source.unsplash.com"
 };
 
 /*
