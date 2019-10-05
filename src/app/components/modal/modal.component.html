@@ -1,7 +1,7 @@
 <h1 mat-dialog-title>{{data.name}} ({{data.alpha3Code}})</h1>
 <div mat-dialog-content>
   <p>Capital: {{data.capital}}</p>
-  <p>Did you know that {{data.name}} ({{data.nativeName}}) has a approximate population of {{data.population}}? {{data.name}} is located in {{data.region}}, {{data.subregion}} and follows the timezone of  <span *ngFor="let timezone of data.timezones">{{timezone}} </span></p>
+  <p>Did you know that {{data.name}} ({{data.nativeName}}) has an approximate population of {{data.population}}? {{data.name}} is located in {{data.region}}, {{data.subregion}} and follows the timezone of  <span *ngFor="let timezone of data.timezones">{{timezone}} </span></p>
   <p>If you need to call someone in {{data.name}}, their calling code starts with a <span *ngFor="let callCode of data.callingCodes">+{{callCode}}</span></p>
   <p>{{data.name}} has the currency of {{data.currencies.name}} ({{data.currencies.code}}) which has the symbol of {{data.currencies.symbol}}</p>
   <p><b>Don't forget to hire me! :)</b></p>
