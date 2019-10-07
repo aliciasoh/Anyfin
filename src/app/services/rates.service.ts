@@ -13,6 +13,6 @@ export class RatesService {
   ) { }
 
   getAllRates(){
-    return this.http.get<Rate[]>(environment.rateBaseURL + '/latest?base=SEK');
+    return this.http.get<Rate[]>(environment.rates.rateBaseURL + '/latest?access_key=' + environment.rates.apiKey);
   }
 }

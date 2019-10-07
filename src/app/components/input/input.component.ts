@@ -33,6 +33,9 @@ export class InputComponent implements OnInit {
   toggleFromExchangeRate;
   toggleToExchangeRate;
 
+  isLoaded;
+
+
   constructor(
     private countriesService: CountriesService,
     private photosService: PhotosService,
@@ -42,20 +45,32 @@ export class InputComponent implements OnInit {
    }
 
   ngOnInit() {
+    this.isLoaded = false;
     forkJoin(
       this.countriesService.getAllCountries(),
       this.ratesService.getAllRates(),
     ).subscribe(([countryData, rateData]) => {
       this.ratesData = rateData;
+      this.filterRates(this.ratesData);
       this.filterAllCountry(countryData);
+      this.isLoaded = true;
     });
+  }
+
+  filterRates(ratesData){
+    let sekRate = ratesData['rates']['SEK'];
+    let filteredRates = {};
+    Object.keys(ratesData['rates']).forEach(eachCurrency=>{
+      filteredRates[eachCurrency] = (ratesData['rates'][eachCurrency]/sekRate);
+    })
+    this.ratesData['rates'] = filteredRates;
   }
 
   filterAllCountry(countryData){
     let arr = [];
     countryData.forEach(country =>{
       country.currencies.forEach(eachCurrency => {
-        if(this.ratesData['rates'].hasOwnProperty(eachCurrency.code) && !arr.includes(country)){
+        if(this.ratesData['rates'].hasOwnProperty(eachCurrency.code) && eachCurrency.code.includes(country.alpha2Code) && !arr.includes(country)){
           country.currencies = eachCurrency;
           arr.push(country);
         }
