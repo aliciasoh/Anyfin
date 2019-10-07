@@ -70,8 +70,10 @@ export class InputComponent implements OnInit {
     let arr = [];
     countryData.forEach(country =>{
       country.currencies.forEach(eachCurrency => {
-        if(this.ratesData['rates'].hasOwnProperty(eachCurrency.code) && eachCurrency.code.includes(country.alpha2Code) && !arr.includes(country)){
-          country.currencies = eachCurrency;
+        if(this.ratesData['rates'].hasOwnProperty(eachCurrency.code) && !arr.includes(country)){
+          country.currencies = this.getCountryMainCurrency(country.currencies, country.alpha2Code);
+          country.currencies.code = country.currencies.code.substring(0,3);
+          console.log(country.currencies);
           arr.push(country);
         }
       });
@@ -80,6 +82,16 @@ export class InputComponent implements OnInit {
       }
     })
     this.countriesData = arr;
+  }
+
+  getCountryMainCurrency(currencies, iso2){
+    let mainCurrency;
+    currencies.forEach(eachCurrency => {
+      if(!!eachCurrency.code && eachCurrency.code.includes(iso2)){
+        mainCurrency = eachCurrency;
+      }
+    });
+    return !!mainCurrency ? mainCurrency : (!!currencies[0].code && currencies[0].code!="(none)" ? currencies[0] : currencies[1]);
   }
 
   populateInitial(country){
