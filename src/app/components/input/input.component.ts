@@ -73,7 +73,6 @@ export class InputComponent implements OnInit {
         if(this.ratesData['rates'].hasOwnProperty(eachCurrency.code) && !arr.includes(country)){
           country.currencies = this.getCountryMainCurrency(country.currencies, country.alpha2Code);
           country.currencies.code = country.currencies.code.substring(0,3);
-          console.log(country.currencies);
           arr.push(country);
         }
       });
